@@ -1,0 +1,117 @@
+{
+	"TableCount": "4",
+	"Tables": [
+
+		{
+			"TableName": "tags",
+			"TablePath": "data/tags/",
+			"TableOwner": "data",
+			"TableColumnsTotal": "4",
+			"TableColumns": [{
+					"ColumnName": "userId",
+					"ColumnType": "STRING",
+					"ColumnLength": "20",
+					"ColumnNullable": "false",
+					"ColumnIsPk": "true"
+				},
+				{
+					"ColumnName": "movieId",
+					"ColumnType": "STRING",
+					"ColumnLength": "20",
+					"ColumnNullable": "false"
+				},
+				{
+					"ColumnName": "tag",
+					"ColumnType": "STRING",
+					"ColumnLength": "255"
+				},
+				{
+					"ColumnName": "timestamp",
+					"ColumnType": "STRING",
+					"ColumnLength": "20"
+				}
+			]
+		},
+
+		{
+			"TableName": "ratings",
+			"TablePath": "data/ratings/",
+			"TableOwner": "data",
+			"TableColumnsTotal": "4",
+			"TableColumns": [{
+					"ColumnName": "userId",
+					"ColumnType": "STRING",
+					"ColumnLength": "20",
+					"ColumnNullable": "false",
+					"ColumnIsPk": "true"
+				},
+				{
+					"ColumnName": "movieId",
+					"ColumnType": "STRING",
+					"ColumnLength": "20",
+					"ColumnNullable": "false"
+				},
+				{
+					"ColumnName": "rating",
+					"ColumnType": "STRING",
+					"ColumnLength": "5"
+				},
+				{
+					"ColumnName": "timestamp",
+					"ColumnType": "STRING",
+					"ColumnLength": "20"
+				}
+			]
+		},
+
+		{
+			"TableName": "links",
+			"TablePath": "data/links/",
+			"TableOwner": "data",
+			"TableColumnsTotal": "3",
+			"TableColumns": [{
+					"ColumnName": "movieId",
+					"ColumnType": "STRING",
+					"ColumnLength": "20",
+					"ColumnNullable": "false",
+					"ColumnIsPk": "true"
+				},
+				{
+					"ColumnName": "imdbId",
+					"ColumnType": "STRING",
+					"ColumnLength": "20"
+				},
+				{
+					"ColumnName": "tmdbId",
+					"ColumnType": "STRING",
+					"ColumnLength": "20"
+				}
+			]
+		},
+
+		{
+			"TableName": "movies",
+			"TablePath": "data/movies/",
+			"TableOwner": "data",
+			"TableColumnsTotal": "3",
+			"TableColumns": [{
+					"ColumnName": "movieId",
+					"ColumnType": "STRING",
+					"ColumnLength": "20",
+					"ColumnNullable": "false",
+					"ColumnIsPk": "true"
+				},
+				{
+					"ColumnName": "title",
+					"ColumnType": "STRING",
+					"ColumnLength": "255"
+				},
+				{
+					"ColumnName": "genres",
+					"ColumnType": "STRING",
+					"ColumnLength": "255"
+				}
+			]
+		}
+	]
+}

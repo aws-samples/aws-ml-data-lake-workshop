@@ -1,0 +1,37 @@
+{
+  "TableCount": "1",
+  "Tables": [
+    {
+      "TableName": "movies",
+      "TablePath": "data/tags/",
+      "TableOwner": "tags",
+      "TableColumnsTotal": "4",
+      "TableColumns": [
+        {
+          "ColumnName": "userId",
+          "ColumnType": "STRING",
+          "ColumnLength": "20",
+          "ColumnNullable": "false",
+          "ColumnIsPk": "true"
+        },
+        {
+          "ColumnName": "movieId",
+          "ColumnType": "STRING",
+          "ColumnLength": "20",
+          "ColumnNullable": "false",
+          "ColumnIsPk": "true"
+        },
+        {
+          "ColumnName": "tag",
+          "ColumnType": "STRING",
+          "ColumnLength": "255"
+        },
+        {
+          "ColumnName": "timestamp",
+          "ColumnType": "STRING",
+          "ColumnLength": "20"
+        }
+      ]
+    }
+  ]
+}

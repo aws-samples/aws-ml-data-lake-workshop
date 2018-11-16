@@ -1,0 +1,92 @@
+AWSTemplateFormatVersion: 2010-09-09
+
+Description: Create DMS Instance, Tasks, VPC, Subnet, Source Bucket, Target Tables in Dynamo for data replication.
+
+Parameters:
+    EnvironmentName:
+        Description: An environment name that will be prefixed to resource names
+        Type: String
+        Default: dms-vpc
+
+    VpcCIDR: 
+        Description: Please enter the IP range (CIDR notation) for this VPC
+        Type: String
+        Default: 10.192.0.0/16
+
+    PublicSubnet1CIDR:
+        Description: Please enter the IP range (CIDR notation) for the public subnet in the first Availability Zone
+        Type: String
+        Default: 10.192.10.0/24
+
+    PublicSubnet2CIDR:
+        Description: Please enter the IP range (CIDR notation) for the public subnet in the second Availability Zone
+        Type: String
+        Default: 10.192.11.0/24
+        
+    ReplicationInstance:
+        Description: The instance type to use for the replication instance.
+        Type: String
+        Default: dms.c4.4xlarge
+        
+    DMSRoleName:
+        Description: role name for DMS tasks
+        Type: String
+        Default: dms-vpc-role
+        
+Resources:
+
+    rolesAndBucketStack:
+        Type: AWS::CloudFormation::Stack
+        Properties:
+          TemplateURL: https://s3-us-west-2.amazonaws.com/prc-reinvent-2018/cfn-scripts/create-roles-and-bucket-001.yaml
+          TimeoutInMinutes: '60'
+      
+    vpcStack:
+        Type: AWS::CloudFormation::Stack
+        Properties:
+          Parameters:
+            EnvironmentName: !Ref EnvironmentName
+            VpcCIDR: !Ref VpcCIDR
+            PublicSubnet1CIDR: !Ref PublicSubnet1CIDR
+            PublicSubnet2CIDR: !Ref PublicSubnet2CIDR
+          TemplateURL: https://s3-us-west-2.amazonaws.com/prc-reinvent-2018/cfn-scripts/create-vpc-002.yaml
+          TimeoutInMinutes: '60'
+      
+    dmsStack:
+        Type: AWS::CloudFormation::Stack
+        Properties:
+          Parameters:
+            ReplicationInstance: !Ref ReplicationInstance
+            DMSRoleName: !Ref DMSRoleName
+          TemplateURL: https://s3-us-west-2.amazonaws.com/prc-reinvent-2018/cfn-scripts/create-dms-stack-003.yaml
+          TimeoutInMinutes: '60'
+        DependsOn: 
+        - vpcStack
+        - rolesAndBucketStack
+      
+    copyToS3:
+        Type: AWS::CloudFormation::Stack
+        Properties:
+          TemplateURL: https://s3-us-west-2.amazonaws.com/prc-reinvent-2018/cfn-scripts/copy-data-to-s3-004.yaml
+          TimeoutInMinutes: '60'
+        DependsOn: 
+        - vpcStack
+        - rolesAndBucketStack
+        - dmsStack
+      
+    startDMSReplication:
+        Type: AWS::CloudFormation::Stack
+        Properties:
+          TemplateURL: https://s3-us-west-2.amazonaws.com/prc-reinvent-2018/cfn-scripts/start-dms-replication-005.yaml
+          TimeoutInMinutes: '60'
+        DependsOn: 
+        - vpcStack
+        - rolesAndBucketStack
+        - dmsStack
+        - copyToS3
+      
+Outputs:
+    StackRef:
+        Value: !Ref dmsStack
+    OutputFromNestedStack:
+        Value: !GetAtt dmsStack.Outputs.DMSTaskMigration

@@ -1,0 +1,157 @@
+AWSTemplateFormatVersion: 2010-09-09
+
+Description: Create DMS,Glue, Kinesis roles and create a private Source bucket
+
+Resources: 
+
+  SourceDataBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub "${AWS::AccountId}-reinvent-2018-data"
+      AccessControl: Private
+
+  DMSRole: 
+    Type: "AWS::IAM::Role"
+    Properties: 
+      AssumeRolePolicyDocument: 
+        Version: "2012-10-17"
+        Statement: 
+          - 
+            Effect: "Allow"
+            Principal: 
+              Service: 
+                - "dms.amazonaws.com"
+            Action: 
+              - "sts:AssumeRole"
+      Path: "/"
+      ManagedPolicyArns:
+          - "arn:aws:iam::aws:policy/AmazonS3FullAccess"
+          - "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess"
+          - "arn:aws:iam::aws:policy/service-role/AmazonDMSVPCManagementRole"
+          - "arn:aws:iam::aws:policy/service-role/AmazonDMSCloudWatchLogsRole"
+      RoleName: "dms-vpc-role"
+      
+  RootInstanceProfile: 
+    Type: "AWS::IAM::InstanceProfile"
+    Properties: 
+      Path: "/"
+      Roles: 
+        - 
+          Ref: "DMSRole"
+
+  AWSLambdaKinesisRole: 
+    Type: "AWS::IAM::Role"
+    Properties: 
+      AssumeRolePolicyDocument: 
+        Version: "2012-10-17"
+        Statement: 
+          - 
+            Effect: "Allow"
+            Principal: 
+              Service: 
+                - "lambda.amazonaws.com"
+            Action: 
+              - "sts:AssumeRole"
+      Path: "/"
+      ManagedPolicyArns:
+          - "arn:aws:iam::aws:policy/service-role/AWSLambdaKinesisExecutionRole"
+          - "arn:aws:iam::aws:policy/AmazonKinesisFullAccess"
+          - "arn:aws:iam::aws:policy/AmazonS3FullAccess"
+      RoleName: "lambda-kinesis-role"
+      
+  RootInstanceProfile: 
+    Type: "AWS::IAM::InstanceProfile"
+    Properties: 
+      Path: "/"
+      Roles: 
+        - 
+          Ref: "AWSLambdaKinesisRole"
+          
+  AWSGlueServiceRole: 
+    Type: "AWS::IAM::Role"
+    Properties: 
+      AssumeRolePolicyDocument: 
+        Version: "2012-10-17"
+        Statement: 
+          - 
+            Effect: "Allow"
+            Principal: 
+              Service: 
+                - "glue.amazonaws.com"
+            Action: 
+              - "sts:AssumeRole"
+      Path: "/"
+      ManagedPolicyArns:
+          - "arn:aws:iam::aws:policy/service-role/AWSLambdaKinesisExecutionRole"
+          - "arn:aws:iam::aws:policy/service-role/AWSGlueServiceNotebookRole"
+          - "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess"
+          - "arn:aws:iam::aws:policy/service-role/AWSGlueServiceRole"
+          - "arn:aws:iam::aws:policy/AmazonS3FullAccess"
+      RoleName: "glue-service-role"
+      
+  RootInstanceProfile: 
+    Type: "AWS::IAM::InstanceProfile"
+    Properties: 
+      Path: "/"
+      Roles: 
+        - 
+          Ref: "AWSGlueServiceRole"
+  
+  LambdaExecutionRole: 
+    Type: "AWS::IAM::Role"
+    Properties: 
+      AssumeRolePolicyDocument: 
+        Version: "2012-10-17"
+        Statement: 
+          - 
+            Effect: "Allow"
+            Principal: 
+              Service: 
+                - "lambda.amazonaws.com"
+            Action: 
+              - "sts:AssumeRole"
+      Path: "/"
+      Policies: 
+        - 
+          PolicyName: "DMSFullAccess"
+          PolicyDocument: 
+            Version: "2012-10-17"
+            Statement: 
+              - 
+                Effect: "Allow"
+                Action: "dms:*"
+                Resource: "*"
+      ManagedPolicyArns:
+          - "arn:aws:iam::aws:policy/AWSLambdaExecute"
+      RoleName: "lambda-execution-role"
+      
+  RootInstanceProfile: 
+    Type: "AWS::IAM::InstanceProfile"
+    Properties: 
+      Path: "/"
+      Roles: 
+        - 
+          Ref: "LambdaExecutionRole"
+
+
+
+          
+Outputs: 
+
+    DMSVPCRole: 
+        Description: A reference to the created VPC
+        Value: !Ref DMSRole
+        Export : 
+          Name: DMSRoleExport
+
+    LambdaExecutionRole: 
+        Description: A reference to the created VPC
+        Value: !Ref LambdaExecutionRole
+        Export : 
+          Name: LambdaExecutionRoleExport
+          
+    SourceDataBucket:
+        Description: A reference to the public subnet in the 1st Availability Zone
+        Value: !Ref SourceDataBucket
+        Export : 
+          Name: DMSSourceBucketExport

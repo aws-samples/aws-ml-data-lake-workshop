@@ -1,0 +1,201 @@
+{
+	"rules": [{
+			"rule-type": "selection",
+			"rule-id": "1",
+			"rule-name": "1",
+			"object-locator": {
+				"schema-name": "data",
+				"table-name": "%"
+			},
+			"rule-action": "include"
+		},
+
+
+		{
+			"rule-type": "object-mapping",
+			"rule-id": "2",
+			"rule-name": "2",
+			"rule-action": "map-record-to-record",
+			"object-locator": {
+				"schema-name": "data",
+				"table-name": "tags"
+			},
+			"target-table-name": "tags_t",
+			"mapping-parameters": {
+				"partition-key-name": "Id",
+				"sort-key-name": "movieId",
+				"exclude-columns": [
+					"userId",
+					"movieId",
+					"tags",
+					"timestamp"
+				],
+				"attribute-mappings": [{
+						"target-attribute-name": "Id",
+						"attribute-type": "scalar",
+						"attribute-sub-type": "string",
+						"value": "${userId}X${movieId}"
+					},
+					{
+						"target-attribute-name": "userId",
+						"attribute-type": "scalar",
+						"attribute-sub-type": "string",
+						"value": "${userId}"
+					},
+					{
+						"target-attribute-name": "movieId",
+						"attribute-type": "scalar",
+						"attribute-sub-type": "string",
+						"value": "${movieId}"
+					},
+					{
+						"target-attribute-name": "tags",
+						"attribute-type": "scalar",
+						"attribute-sub-type": "string",
+						"value": "${tags}"
+					},
+					{
+						"target-attribute-name": "timestamp_c",
+						"attribute-type": "scalar",
+						"attribute-sub-type": "string",
+						"value": "${timestamp}"
+					}
+				]
+			}
+		},
+
+
+		{
+			"rule-type": "object-mapping",
+			"rule-id": "3",
+			"rule-name": "3",
+			"rule-action": "map-record-to-record",
+			"object-locator": {
+				"schema-name": "data",
+				"table-name": "ratings"
+			},
+			"target-table-name": "ratings_t",
+			"mapping-parameters": {
+				"partition-key-name": "Id",
+				"sort-key-name": "movieId",
+				"exclude-columns": [
+					"userId",
+					"movieId",
+					"rating",
+					"timestamp"
+				],
+				"attribute-mappings": [{
+						"target-attribute-name": "Id",
+						"attribute-type": "scalar",
+						"attribute-sub-type": "string",
+						"value": "${userId}X${movieId}"
+					},
+					{
+						"target-attribute-name": "userId",
+						"attribute-type": "scalar",
+						"attribute-sub-type": "string",
+						"value": "${userId}"
+					},
+					{
+						"target-attribute-name": "movieId",
+						"attribute-type": "scalar",
+						"attribute-sub-type": "string",
+						"value": "${movieId}"
+					},
+					{
+						"target-attribute-name": "rating",
+						"attribute-type": "scalar",
+						"attribute-sub-type": "string",
+						"value": "${rating}"
+					},
+					{
+						"target-attribute-name": "timestamp_c",
+						"attribute-type": "scalar",
+						"attribute-sub-type": "string",
+						"value": "${timestamp}"
+					}
+				]
+			}
+		},
+
+		{
+			"rule-type": "object-mapping",
+			"rule-id": "4",
+			"rule-name": "4",
+			"rule-action": "map-record-to-record",
+			"object-locator": {
+				"schema-name": "data",
+				"table-name": "movies"
+			},
+			"target-table-name": "movies_t",
+			"mapping-parameters": {
+				"partition-key-name": "movieId",
+				"sort-key-name": "genres",
+				"exclude-columns": [
+					"movieId",
+					"title",
+					"genres"
+				],
+				"attribute-mappings": [{
+						"target-attribute-name": "movieId",
+						"attribute-type": "scalar",
+						"attribute-sub-type": "string",
+						"value": "${movieId}"
+					},
+					{
+						"target-attribute-name": "title",
+						"attribute-type": "scalar",
+						"attribute-sub-type": "string",
+						"value": "${title}"
+					},
+					{
+						"target-attribute-name": "genres",
+						"attribute-type": "scalar",
+						"attribute-sub-type": "string",
+						"value": "${genres}"
+					}
+				]
+			}
+		},
+
+		{
+			"rule-type": "object-mapping",
+			"rule-id": "5",
+			"rule-name": "5",
+			"rule-action": "map-record-to-record",
+			"object-locator": {
+				"schema-name": "data",
+				"table-name": "links"
+			},
+			"target-table-name": "links_t",
+			"mapping-parameters": {
+				"partition-key-name": "movieId",
+				"sort-key-name": "imdbId",
+				"exclude-columns": [
+					"movieId",
+					"imdbId",
+					"tmdbId"
+				],
+				"attribute-mappings": [{
+						"target-attribute-name": "movieId",
+						"attribute-type": "scalar",
+						"attribute-sub-type": "string",
+						"value": "${movieId}"
+					},
+					{
+						"target-attribute-name": "imdbId",
+						"attribute-type": "scalar",
+						"attribute-sub-type": "string",
+						"value": "${imdbId}"
+					},
+					{
+						"target-attribute-name": "tmdbId",
+						"attribute-type": "scalar",
+						"attribute-sub-type": "string",
+						"value": "${tmdbId}"
+					}
+				]
+			}
+		}
+	]
+}

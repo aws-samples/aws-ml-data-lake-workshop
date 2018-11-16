@@ -1,0 +1,30 @@
+{
+  "TableCount": "1",
+  "Tables": [
+    {
+      "TableName": "movies",
+      "TablePath": "data/movies/",
+      "TableOwner": "data",
+      "TableColumnsTotal": "3",
+      "TableColumns": [
+        {
+          "ColumnName": "movieid",
+          "ColumnType": "STRING",
+          "ColumnLength": "20",
+          "ColumnNullable": "false",
+          "ColumnIsPk": "true"
+        },
+        {
+          "ColumnName": "title",
+          "ColumnType": "STRING",
+          "ColumnLength": "255"
+        },
+        {
+          "ColumnName": "genres",
+          "ColumnType": "STRING",
+          "ColumnLength": "255"
+        }
+      ]
+    }
+  ]
+}

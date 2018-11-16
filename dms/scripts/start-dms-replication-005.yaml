@@ -1,0 +1,56 @@
+AWSTemplateFormatVersion: 2010-09-09
+
+Description:  Start DMS Replication Task
+Resources:
+  startDMSTask:
+    Type: 'Custom::StartDMSReplication'
+    Properties:
+      ServiceToken: !GetAtt 
+        - StartDMSReplicationTask
+        - Arn
+      DMSTaskARN: !ImportValue DMSTaskExport
+  StartDMSReplicationTask:
+    Type: 'AWS::Lambda::Function'
+    Properties:
+      Handler: index.lambda_handler
+      Role: !Sub 'arn:aws:iam::${AWS::AccountId}:role/lambda-execution-role'
+      Code:
+        ZipFile: !Join 
+          - |+
+
+          - - ''
+            - import os
+            - import urllib.request
+            - from urllib.parse import urlparse
+            - import json
+            - import boto3
+            - import cfnresponse
+            - ''
+            - print('Loading function')
+            - ''
+            - client = boto3.client('dms')
+            - ''
+            - ''
+            - 'def lambda_handler(event, context):'
+            - '    print(''Received event: '' + json.dumps(event, indent=2))'
+            - ''
+            - '    if event[''RequestType''] == ''Create'':'
+            - '        # get the properties set in the CloudFormation resource'
+            - '        properties = event[''ResourceProperties'']'
+            - '        taskARN = properties[''DMSTaskARN'']'
+            - ''
+            - '        try:'
+            - '            response = client.start_replication_task(ReplicationTaskArn=taskARN'
+            - '                       ,StartReplicationTaskType=''start-replication'')'
+            - '            print(''DMS Response: %s'' % response)'
+            - ''
+            - '        except Exception as e:'
+            - '            print(e)'
+            - '            cfnresponse.send(event, context, cfnresponse.FAILED, {'
+            - '                             ''Response'': ''Failure''})'
+            - '            return'
+            - ''
+            - '    cfnresponse.send(event, context, cfnresponse.SUCCESS,'
+            - '                     {''Response'': ''Success''})'
+      Runtime: python3.6
+      Timeout: 60

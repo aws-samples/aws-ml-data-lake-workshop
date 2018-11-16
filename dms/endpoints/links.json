@@ -1,0 +1,31 @@
+{
+  "TableCount": "1",
+  "Tables": [
+    {
+      "TableName": "links",
+      "TablePath": "data/links/",
+      "TableOwner": "links",
+      "TableColumnsTotal": "3",
+      "TableColumns": [
+        {
+          "ColumnName": "movieid",
+          "ColumnType": "STRING",
+          "ColumnLength": "20",
+          "ColumnNullable": "false",
+          "ColumnIsPk": "true"
+        },
+        {
+          "ColumnName": "imdbId",
+          "ColumnType": "STRING",
+          "ColumnLength": "20"
+        },
+        {
+          "ColumnName": "tmdbId",
+          "ColumnType": "STRING",
+          "ColumnLength": "20"
+        }
+      ]
+    }
+  ]
+}
+

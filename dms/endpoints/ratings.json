@@ -1,0 +1,37 @@
+{
+  "TableCount": "1",
+  "Tables": [
+    {
+      "TableName": "ratings",
+      "TablePath": "data/ratings/",
+      "TableOwner": "ratings",
+      "TableColumnsTotal": "4",
+      "TableColumns": [
+        {
+          "ColumnName": "userId",
+          "ColumnType": "STRING",
+          "ColumnLength": "20",
+          "ColumnNullable": "false",
+          "ColumnIsPk": "true"
+        },
+        {
+          "ColumnName": "movieId",
+          "ColumnType": "STRING",
+          "ColumnLength": "20",
+          "ColumnNullable": "false",
+        },
+        {
+          "ColumnName": "rating",
+          "ColumnType": "STRING",
+          "ColumnLength": "5"
+        },
+        {
+          "ColumnName": "timestamp",
+          "ColumnType": "STRING",
+          "ColumnLength": "20"
+        }
+      ]
+    }
+  ]
+}
+
