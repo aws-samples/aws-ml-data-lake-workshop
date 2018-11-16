@@ -6,13 +6,21 @@ Enterprises today are exploring ways to upgrade existing applications to harvest
 
 In the workshop, we will discuss how you can build an end to end pipeline for machine learning. Machine learning is more than building a cool model. It involves tasks that includes data sourcing, data ingestion, data transformation, pre-processing data for use in training, training a model and hosting the model.
 
-AWS provides several services to address specific needs of different stages of machine learning pipeline. The workshop have multiple labs that focus on different stages of machine learning pipeline. We will be demonstrating the overall flow and design of machine learning pipeline by using movie-lens dataset to build a recommendation engine for movies. 
+AWS provides several services to address specific needs of different stages of machine learning pipeline. The workshop have multiple labs that focus on different stages of machine learning pipeline. We will be demonstrating the overall flow and design of machine learning pipeline by using movielens dataset to build a recommendation engine for movies. 
+Datasource link - https://grouplens.org/datasets/movielens/
 
-The workshop is divided into four labs.  In **Lab 1**, we will source the movie-lens dataset from external source on internet, bring it to S3 and upload it into Dynamo DB. In enterprises the equivalent data may be already  present in some RDS, NoSQL or Data-warehouse system. The data can be ingested as a one time full-load as a batch or as a real-time stream of data. 
+The workshop is divided into four labs.  
 
-Depending on the usecase, there may be a need to do both batch and stream or just a batch or a stream. In the current workshop, we will do a one full-load of data into Dynamo DB and then replay new records into Kinesis stream using the Lamda function as a source simulator. Each lab has references to resources and instruction to help you complete the lab successfully.
+In Lab 1, we will source the movie-lens dataset from external source on internet, bring it to S3 and upload it into Dynamo DB. In enterprises the equivalent data may be already  present in some RDS, NoSQL or Data-warehouse system. The data can be ingested as a one time full-load as a batch or as a real-time stream of data. 
 
-The labs are **sequential** and participants will have to complete them in the sequence.
+Lab 2 - Depending on the usecase, there may be a need to do both batch and stream or just a batch or a stream. In the current workshop, we will do a one full-load of data into Dynamo DB and then stream new records into Kinesis stream using the Lamda function as a source simulator. 
+
+Lab 3 - In this Lab, you will use Glue Data Catalog to define schema on the data stored in S3 and DynamoDB. You will perform ETL on the data to prepare it for the machine learning process.
+
+Lab 4 - At this point you should have all you files in an AWS S3 bucket ready for Data Science work. We will use Amazon Sagemaker for model training and inference.
+
+The labs are **sequential** and participants will have to complete them in the sequence. Each lab has references to resources and instruction to help you complete the lab successfully.
+
 
 
 ## Reference Architecture
