@@ -303,24 +303,20 @@ At this point you should have all you files in an AWS S3 bucket ready for Data S
 The following steps will walk you through all the processes required for this part of the lab.
 
 ## Step 1: Launch an Amazon SageMaker Notebook Instance
-a. Open the AWS management console, ***search*** and ***select SageMaker***.
 
+1. Open the AWS management console, ***search*** and ***select SageMaker***.
 ![Console Screenshot](https://s3.amazonaws.com/recommendation-48/MacDown/AWS_Management_Console-2.png)
 
-b. From the SageMaker dashboard, click ***create notebook instance***
-
+2. From the SageMaker dashboard, click ***create notebook instance***
 ![ SageMaker Console](https://s3.amazonaws.com/recommendation-48/MacDown/Amazon_SageMaker.png)
 
-c. On the create notebook instance page, do the following:
-
-1. Give your notebook instance a name your will remember.
-2. Select ml.m4.16xlarge for notebook instance type.
-3. For your IAM role - select **create a new role** from the drop down menu.
- 
-![Console Screenshot](https://s3.amazonaws.com/recommendation-48/MacDown/Amazon_SageMaker-4.png)
+3. On the create notebook instance page, do the following:
+	1. Give your notebook instance a name your will remember.
+	2. Select ml.m4.16xlarge for notebook instance type.
+	3. For your IAM role - select **create a new role** from the drop down menu.
+ ![Console Screenshot](https://s3.amazonaws.com/recommendation-48/MacDown/Amazon_SageMaker-4.png)
 
 4. Select ***any S3 bucket*** from the pop-up dialogue box and ***create role***
-
 ![Console Screenshot](https://s3.amazonaws.com/recommendation-48/MacDown/Amazon_SageMaker-5.png)
 
 5.	Amazon SageMaker will create a new role for you and pre-select that role. Next ***create notebook instance***.
@@ -334,15 +330,12 @@ c. On the create notebook instance page, do the following:
 ![Console Screenshot](https://s3.amazonaws.com/recommendation-48/MacDown/Amazon_SageMaker-11.png)
 
 2. Your notebook landing page should be similar this below:
-
 ![Console Screenshot](https://s3.amazonaws.com/recommendation-48/MacDown/Home.png)
 
 3. Open a terminal by clicking on **New** and then **Terminal**
-
 ![Console Screenshot](https://s3.amazonaws.com/recommendation-48/MacDown/Home-3.png)
 
 4. Run the following commands in your terminal (**copy, paste and press enter**) and ensure to follow the instructions on your terminal screen.
-
 ```
 wget https://s3.amazonaws.com/dallas-ai-day/SageMaker-Reco/Helper.sh
 sh Helper.sh
@@ -354,7 +347,7 @@ sh Helper.sh
 6. Return to your notebook landing page by selecting your browser tab titled **Home**. Click on the **Movie _Recommender _Lab4.ipynb** notebook and proceed with the instructions in the notebook.  
 ![Console Screenshot](https://s3.amazonaws.com/recommendation-48/MacDown/Home-5.png)
 
-7. **Congratulations!** you have finished all the labs. Please make sure to delete all resources as part of this lab.
+7. **Congratulations!** you have finished all the labs. Please make sure to delete all resources as mentioned in the section below.
 
 ## Cleanup Resources
 1. Navigate to DynamoDb Console 
