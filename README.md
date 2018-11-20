@@ -369,11 +369,15 @@ sh Helper.sh
 ![Firehose Console](./images/firehose-delete.png)
 9. Delete AWS Lambda function.  
 ![Lambda Console](./images/lambda-delete.png)
-9. Delete AWS Glue crawler and job. 
+10. Delete AWS Glue crawler and job. 
 ![Glue Console](./images/glue-crawler-delete.png)
 ![Glue Console](./images/glue-job-delete.png)
-10. Go to Amazon Sagemaker console and stop the notebook instance and delete it under actions.
-![Glue Console](./images/sagemaker-delete.png)
+11. Go to Amason Sagemaker console to shutdown your notebook instance, select your instance from the list.
+![Console Screenshot](https://s3.amazonaws.com/recommendation-48/MacDown/Amazon_SageMaker.png)
+12. Select **Stop** from the **Actions** drop down menu. 
+![Console Screenshot](https://s3.amazonaws.com/recommendation-48/MacDown/Amazon_SageMaker_and_Amazon_SageMaker_Customers_-_Amazon_Web_Services__AWS_.png)
+13. After your notebook instance completely **Stopped**, select **Delete** fron the **Actions** drop down menu to delete your notebook instance.
+![Console Screenshot](https://s3.amazonaws.com/recommendation-48/MacDown/Amazon_SageMaker-2.png)
  
 
 
