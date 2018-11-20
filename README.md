@@ -40,7 +40,7 @@ You can choose to run CloudFormation templates one by one manully in sequence. I
 
 The second way to create full DMS stack is to run the dms-full-stack-nested.yaml file that will automatically run the five CloudFormation templates i.e <filename>-001.yaml - <filename>-005.yaml sequentially without manual intervention.
 
-For this workshop we will go with second option. Run one nested CloudFormation template to create full DMS stack. Follow steps outlined below to create full DMS stack. The output of this step will be four dynamo Db tables populated with movie-lens data. You will see 5th table named <exceptions> with now records.
+For this workshop we will go with second option. Run one nested CloudFormation template to create full DMS stack. Follow steps outlined below to create full DMS stack. The output of this step will be four dynamo Db tables populated with movie-lens data. You will see 5th table named '*_exceptions' with zero records.
 
 ### List of resoucres
 
@@ -56,7 +56,7 @@ We will provision following resources using CloudFormation templates:
 ### Execution steps
 
 1. Sign into AWS console with Valid credentials
-2. Choose AWS region. Preferred region for this lab is N Virginia.
+2. Choose AWS region. Preferred region for this lab is N. Virginia.
 3. Navigate to Cloudformation service console. 
 ![DMS Service Console](./images/dms-001.png) 
 4. Click 'Create Stack'. 
@@ -78,7 +78,7 @@ Launch in the N. Virgina Region
 ![DMS Service Console](./images/dms-006.png)
 9. Wait for Cloudformation to provision all your resources. It will take around 15 minutes for complete execution.
 
-###Validation steps
+### Validation steps
 1. Validate in CloudFormation console that DMS stack has been created successfully. 
 ![DMS Service Console](./images/dms-007.png) 
 2. Click Services, search DMS and Click on Database Migration Service 
@@ -106,6 +106,12 @@ Launch in the N. Virgina Region
 
 Congrats!! You have successfully completed Lab 1
 
+### Note: Make a Note of s3 bucket created in Lab 1 before you proceed with other Labs
+1. Click Services, search for S3
+![S3 Service Console](./images/s3-001.png)
+2. Click Services, search for S3. Copy the name of bucket '*-reinvent-2018-data'. We will use this name in later in following labs.
+![S3 Service Console](./images/s3-002.png)
+
 # **Lab 2 - Stream Data with Kinesis**
 
 In this Lab, we will setup setup a Lambda function to push user rating data into Kinesis data stream and then use Amazon Kinesis Firehose to export data to S3. The Lambda function will simulate user generated real time ratings data. Amazon Kinesis makes it easy to collect, process, and analyze real-time, streaming data so you can get timely insights and react quickly to new information. By using Kinesis, we can store real time data data update our machine learning model. Kinesis supports multiple consumers for its data streams so another consumer can be setup to process data and store it into DynamoDB.
@@ -115,10 +121,10 @@ In this Lab, we will setup setup a Lambda function to push user rating data into
 
    1. Sign into the AWS management console.
    2. In the upper right hand of the console make sure you are in the desired region (eg: N Virginia)
-   3. Click on kinesis from the list of services. You will arrive on the kinesis dashboard.
+   3. Click on **Kinesis** from the list of services. You will arrive on the kinesis dashboard.
    4. On the Kinesis Dashboard, click **Data Stream** on the left panel and then click **Create** **Kinesis Stream**. If you do not see the panel but a welcome page, go ahead and click “**Get Started**”.
     ![](images/kinesis-001.png)
-   5. For Kinesis stream name, enter YourInitials_stream. Enter 1 for Number of Shards. Click on create Kinesis stream. The stream will be on creating status. Wait for stream to be in **ACTIVE** status.
+   5. For Kinesis stream name, enter **YourInitials_stream**. Enter 1 for Number of Shards. Click on create Kinesis stream. The stream will be on creating status. Wait for stream to be in **ACTIVE** status.
     ![](images/kinesis-002.png)
 
 
@@ -126,11 +132,11 @@ In this Lab, we will setup setup a Lambda function to push user rating data into
 
    1. Sign into the AWS management console.
    2. In the upper right hand of the console make sure you are in the desired region (eg: N Virginia)
-   3. Click on kinesis from the list of services. You will arrive on the kinesis dashboard.
+   3. Click on **Kinesis** from the list of services. You will arrive on the kinesis dashboard.
    4. On the Kinesis Dashboard, click **Data Firehose** on the left panel and then click **Create** **Delivery Stream**. If you do not see the panel but a welcome page, go ahead and click “**Get Started**”.
      ![](images/firehose-001.png)
      
-   5.	For Delivery stream name, enter YourInitials_firehosestream. In the Source option field, choose Kinesis stream and in the Kinesis stream drop down, select the stream created in previous section. Click Next
+   5.	For Delivery stream name, enter **YourInitials_firehosestream**. In the Source option field, choose Kinesis stream and in the Kinesis stream drop down, select the stream created in previous section. Click Next
      ![](images/firehose-002.png)
      
    6. In the Process records page, choose Disabled. Note that Amazon Kinesis Firehose provides the capability through Lambda to transform the source data before loading them into the destination datasource. 
@@ -188,11 +194,11 @@ In Lab 2, you used Kinesis to collect and store real time ratings data into S3. 
 2.	Sign into the AWS Management Console https://console.aws.amazon.com/.
 3.	In the upper-right corner of the AWS Management Console, confirm you are in the desired AWS region (e.g., N. Virginia).
 
-4.	Click on Glue from the list of all services. This will bring you to the AWS Glue dashboard page.
-5.	Click on Crawlers on the left panel and then click Add crawler 
-6.	For Crawler name, enter youinnitials_s3_stream.
+4.	Click on **Glue** from the list of all services. This will bring you to the AWS Glue dashboard page.
+5.	Click on **Crawlers** on the left panel and then click **Add crawler** 
+6.	For Crawler name, enter **youinnitials_s3_stream**.
 7.	Click Next 
-8.	For Data store, ensure S3 is selected. Browse to firehose2018 prefix in the bucket that was created for you. Click Select and
+8.	For Data store, ensure S3 is selected. Browse to **firehose2018** prefix in the bucket(**bucket noted from Lab 1**) that was created in Lab 1. Click Select
 
 ![](images/glue-001.png)
 ![](images/glue-002.png)
