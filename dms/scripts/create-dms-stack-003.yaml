@@ -3,7 +3,7 @@ AWSTemplateFormatVersion: 2010-09-09
 Description: Create DMS repliaction Instance and task for data replication from Source S3 bucket to Target Dynamo tables.
 Parameters:
   ReplicationInstance:
-    Default: dms.c4.4xlarge
+    Default: dms.t2.large
     Description: The instance type to use for the replication instance.
     Type: String
   DMSRoleName:

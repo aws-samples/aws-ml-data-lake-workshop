@@ -26,7 +26,7 @@ Parameters:
     ReplicationInstance:
         Description: The instance type to use for the replication instance.
         Type: String
-        Default: dms.c4.4xlarge
+        Default: dms.t2.large
         
     DMSRoleName:
         Description: role name for DMS tasks
