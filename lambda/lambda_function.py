@@ -5,7 +5,7 @@ import boto3
 import csv
 import io
 
-kinesis = boto3.client('kinesis', region_name='us-west-2') #<--- change region if not in N.Virginia
+kinesis = boto3.client('kinesis', region_name='us-west-2') #<--- change region if not in us-west-2
 
 def lambda_handler(event, context):
 
@@ -27,5 +27,3 @@ def getRating(userId, itemId, ratingId, timestamp):
     data['ratingid'] = ratingId
     data['timestamp'] = timestamp
     return data
-
-  

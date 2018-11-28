@@ -166,7 +166,7 @@ In this Lab, we will setup setup a Lambda function to push user rating data into
 			
 6. Click Create function
 7.	In code editor, copy and paste the code under lambda folder of this project.
-8. For variable bigdataStreamName, choose the name of the stream created in Section 1.
+8. For variable bigdataStreamName, choose the name of the stream created in Section 1. Also verify the client is innitialized to the region you are in (us-west-2/us-east-1 etc).
 
  ![](images/lambda-003.png)
 
